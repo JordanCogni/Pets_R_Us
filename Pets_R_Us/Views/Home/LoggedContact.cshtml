@@ -1,0 +1,23 @@
+﻿<h1 style="text-align: center;">Contact Us</h1>
+
+<form style="margin: 0 auto; width: 60%;">
+    <div style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+        <label for="issue" style="margin-bottom: 0.5rem;">Select an Issue:</label>
+        <select id="issue" name="issue" style="padding: 0.5rem; border-radius: 0.25rem; border: 1px solid gray;">
+            <option value="">Select an option</option>
+            <option value="login">Login Issues</option>
+            <option value="payment">Payment Issues</option>
+            <option value="performance">Performance Issues</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+
+    <div style="display: flex; flex-direction: column; margin-bottom: 1rem;">
+        <label for="description" style="margin-bottom: 0.5rem;">Description:</label>
+        <textarea id="description" name="description" rows="5" cols="30" style="padding: 0.5rem; border-radius: 0.25rem; border: 1px solid gray;"></textarea>
+    </div>
+
+    <div style="text-align: center;">
+        <button type="submit" style="padding: 0.75rem 1.5rem; border-radius: 0.25rem; background-color: lightblue; border: none; color: white;" onclick="alert('Your form has been submitted')">Submit</button>
+    </div>
+</form>

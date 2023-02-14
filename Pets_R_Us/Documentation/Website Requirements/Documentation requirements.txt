@@ -1,0 +1,5 @@
+Database dirgram = Done
+Class dirgram
+Website layout style guide = Done
+Sudo Code
+Flow diagram for each function or web page that needs to do something = Done

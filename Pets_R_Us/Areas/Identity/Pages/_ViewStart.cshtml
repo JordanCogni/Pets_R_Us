@@ -1,0 +1,20 @@
+﻿@{
+    if (this.User.IsInRole("Cat"))
+    {
+        Layout = "~/Views/Shared/_CatLayout.cshtml";
+    }
+
+    else if (this.User.IsInRole("Dog"))
+    {
+        Layout = "~/Views/Shared/_DogLayout.cshtml";
+    }
+
+    else if (this.User.IsInRole("Cat-Dog"))
+    {
+        Layout = "~/Views/Shared/_CatDogLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
