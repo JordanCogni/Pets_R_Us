@@ -46,9 +46,20 @@ namespace Pets_R_Us.Areas.Identity.Pages.Account
             new SelectListItem {Value = "Dog", Text = "Dog"},
             new SelectListItem {Value = "Cat-Dog", Text = "Cat-Dog"}
         };
+            Gender = new List<SelectListItem>
+        {
+            new SelectListItem {Value = "Male", Text ="Male"},
+            new SelectListItem {Value = "Female", Text = "Female"},
+            
+        };
+       
         }
 
         public List<SelectListItem> Roles { get; set; }
+
+        public List<SelectListItem> Gender { get; set; }
+
+        public List<SelectListItem> Country { get; set; }
 
 
         /// <summary>
@@ -100,9 +111,11 @@ namespace Pets_R_Us.Areas.Identity.Pages.Account
             public string PhoneNumber { get; set; }
 
             
-            [Display(Name = "Country")]
+            [Display(Name = "Address")]
             public string Address { get; set; }
 
+            [Display(Name = "Country")]
+            public string Country { get; set; }
 
 
             [Required]
@@ -119,7 +132,7 @@ namespace Pets_R_Us.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Pet Gender")]
-            public bool PetGender { get; set; }
+            public string PetGender { get; set; }
            
             [Required]
             [Display(Name = "UserRole")]
