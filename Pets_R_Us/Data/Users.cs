@@ -19,7 +19,7 @@ namespace Pets_R_Us.Data
 
         public int PetAge { get; set; }
 
-        public bool PetGender { get; set; }
+        public string PetGender { get; set; }
 
         [ForeignKey("PetImageTableId")]
         public PetImageTable? PetImageTable { get; set; }

@@ -14,7 +14,7 @@ html {
 }
 
 body {
-    background-image: url('background-image: url('https://wallpaperaccess.com/full/2378668.jpg');');
+    background-image: url('https://wallpaperaccess.com/full/2378668.jpg');
 }
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
@@ -59,7 +59,7 @@ button.accept-policy {
 }
 
 .footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
