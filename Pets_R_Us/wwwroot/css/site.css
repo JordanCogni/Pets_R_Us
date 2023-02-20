@@ -47,6 +47,7 @@ a {
 
 .border-bottom {
     border-bottom: 1px solid #e5e5e5;
+
 }
 
 .box-shadow {
@@ -63,7 +64,7 @@ button.accept-policy {
     width: 100%;
     white-space: nowrap;
     line-height: 60px;
-    position: relative
+    position: absolute;
 }
 
 
