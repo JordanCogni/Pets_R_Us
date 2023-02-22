@@ -10,7 +10,7 @@ namespace Pets_R_Us.Data
 
         public bool? Attending { get; set; }
 
-        public string RequestingUserId { get; set; }
+        public string? RequestingUserId { get; set; }
 
         [ForeignKey("UserId")]
         public Users Users { get; set; }
