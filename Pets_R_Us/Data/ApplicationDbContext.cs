@@ -11,5 +11,7 @@ namespace Pets_R_Us.Data
         }
 
         public DbSet<PetImageTable> PetImageTables { get; set; }
+
+        public DbSet<PlayDate> playDates { get; set; }
     }
 }

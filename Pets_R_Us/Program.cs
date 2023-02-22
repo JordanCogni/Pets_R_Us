@@ -1,9 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Pets_R_Us.Configurations;
 using Pets_R_Us.Contracts;
 using Pets_R_Us.Data;
 using Pets_R_Us.Repositories;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +20,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IPetImageRepository, PetImageRepository>();
+builder.Services.AddScoped<IPlayDateRepository, PlayDateRespository>();
 
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 

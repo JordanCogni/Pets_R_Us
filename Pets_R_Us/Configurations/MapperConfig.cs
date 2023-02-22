@@ -10,6 +10,7 @@ namespace Pets_R_Us.Configurations
         public MapperConfig()
         {
             CreateMap<PetImageTable, PetImageTablesVM>().ReverseMap();
+            CreateMap<PlayDate, PlayDateVM>().ReverseMap();
         }
 
     }
