@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Pets_R_Us.Contracts;
 using Pets_R_Us.Data;
@@ -11,13 +12,15 @@ namespace Pets_R_Us.Controllers
         private readonly IPlayDateRepository playDateRepository;
         private readonly IMapper mapper;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly UserManager<Users> _userManager;
 
         public PlayDateController(IWebHostEnvironment webHostEnvironment, IPlayDateRepository playDateRepository,
-            IMapper mapper)
+            IMapper mapper, UserManager<Users> userManager)
         {
             this.webHostEnvironment = webHostEnvironment;
             this.playDateRepository = playDateRepository;
             this.mapper = mapper;
+            _userManager = userManager;
         }
 
 
@@ -52,16 +55,27 @@ namespace Pets_R_Us.Controllers
         // POST: PlayDateController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(PlayDateVM playDateVM)
+        public async Task<IActionResult> Create(PlayDateVM playDateVM)
         {
-            if (ModelState.IsValid)
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
             {
-                var playDate = mapper.Map<PlayDate>(playDateVM);
-                await playDateRepository.AddAsync(playDate);
-                return RedirectToAction(nameof(Index));
+                playDateVM.Users = user.Id;
+
+                if (ModelState.IsValid)
+                {
+                    var playDate = mapper.Map<PlayDate>(playDateVM);
+
+                    await playDateRepository.AddAsync(playDate);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(playDateVM);
         }
+
+
+
+
 
         // GET: PlayDateController/Edit/5
         public ActionResult Edit(int id)
