@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pets_R_Us.Data;
 
@@ -11,9 +12,10 @@ using Pets_R_Us.Data;
 namespace Pets_R_Us.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230223010549_MakingFK")]
+    partial class MakingFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,10 +210,12 @@ namespace Pets_R_Us.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Users")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
 
                     b.ToTable("playDates");
                 });
@@ -362,6 +366,15 @@ namespace Pets_R_Us.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Pets_R_Us.Data.PlayDate", b =>
+                {
+                    b.HasOne("Pets_R_Us.Data.Users", "Users")
+                        .WithMany()
+                        .HasForeignKey("UsersId");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Pets_R_Us.Data.Users", b =>

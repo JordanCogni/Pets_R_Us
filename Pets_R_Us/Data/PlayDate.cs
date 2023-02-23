@@ -12,7 +12,7 @@ namespace Pets_R_Us.Data
 
         public string? RequestingUserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public Users Users { get; set; }
+        [ForeignKey("UsersId")]
+        public string? Users { get; set; }
     }
 }

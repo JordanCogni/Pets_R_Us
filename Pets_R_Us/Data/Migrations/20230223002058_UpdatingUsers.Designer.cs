@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pets_R_Us.Data;
 
@@ -11,9 +12,10 @@ using Pets_R_Us.Data;
 namespace Pets_R_Us.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230223002058_UpdatingUsers")]
+    partial class UpdatingUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,7 +210,7 @@ namespace Pets_R_Us.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Users")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -294,6 +296,9 @@ namespace Pets_R_Us.Data.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -309,6 +314,8 @@ namespace Pets_R_Us.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.HasIndex("PetImageTableId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -370,7 +377,13 @@ namespace Pets_R_Us.Data.Migrations
                         .WithMany()
                         .HasForeignKey("PetImageTableId");
 
+                    b.HasOne("Pets_R_Us.Data.PlayDate", "PlayDate")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("PetImageTable");
+
+                    b.Navigation("PlayDate");
                 });
 #pragma warning restore 612, 618
         }

@@ -23,5 +23,6 @@ namespace Pets_R_Us.Data
 
         [ForeignKey("PetImageTableId")]
         public PetImageTable? PetImageTable { get; set; }
+
     }
 }
