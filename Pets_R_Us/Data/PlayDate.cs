@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Pets_R_Us.Data
+﻿namespace Pets_R_Us.Data
 {
     public class PlayDate : BaseEntity
     {
@@ -10,9 +8,8 @@ namespace Pets_R_Us.Data
 
         public bool? Attending { get; set; }
 
-        public string? RequestingUserId { get; set; }
+        public string? ReceivingUserId { get; set; }
 
-        [ForeignKey("UsersId")]
-        public string? Users { get; set; }
+        public string Users { get; set; }
     }
 }
