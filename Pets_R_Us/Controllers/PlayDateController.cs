@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pets_R_Us.Contracts;
 using Pets_R_Us.Data;
 using Pets_R_Us.Models;
@@ -24,14 +25,23 @@ namespace Pets_R_Us.Controllers
         }
 
 
-
         // GET: PlayDateController
         public async Task<IActionResult> Index()
         {
-            var playDate = mapper.Map<List<PlayDateVM>>(await playDateRepository.GetAllAsync());
+            var user = await _userManager.GetUserAsync(User);
+            var playDates = await playDateRepository.GetAllAsync();
+            var filteredPlayDates = playDates.Where(p => p.Users.Contains(user.Id));
+            var playDateVMs = mapper.Map<List<PlayDateVM>>(filteredPlayDates);
 
-            return View(playDate);
+            if (playDateVMs.Any())
+            {
+                return View(playDateVMs);
+            }
+
+            return View();
         }
+
+
 
         public IActionResult Create()
         {
@@ -58,17 +68,16 @@ namespace Pets_R_Us.Controllers
         public async Task<IActionResult> Create(PlayDateVM playDateVM)
         {
             var user = await _userManager.GetUserAsync(User);
+
+
             if (user != null)
             {
                 playDateVM.Users = user.Id;
 
-                if (ModelState.IsValid)
-                {
-                    var playDate = mapper.Map<PlayDate>(playDateVM);
+                var playDate = mapper.Map<PlayDate>(playDateVM);
 
-                    await playDateRepository.AddAsync(playDate);
-                    return RedirectToAction(nameof(Index));
-                }
+                await playDateRepository.AddAsync(playDate);
+                return RedirectToAction(nameof(Index));
             }
             return View(playDateVM);
         }
@@ -78,45 +87,59 @@ namespace Pets_R_Us.Controllers
 
 
         // GET: PlayDateController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            var playDate = await playDateRepository.GetAsync(id);
+            if (playDate == null)
+            {
+                return NotFound();
+            }
+
+            var playDateVM = mapper.Map<PlayDateVM>(playDate);
+            return View(playDateVM);
         }
 
         // POST: PlayDateController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, PlayDateVM playDateVM)
         {
-            try
+            if (id != playDateVM.Id)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var playDate = mapper.Map<PlayDate>(playDateVM);
+                    await playDateRepository.UpdateAsync(playDate);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!await playDateRepository.Exists(playDateVM.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(playDateVM);
         }
 
-        // GET: PlayDateController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: PlayDateController/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            await playDateRepository.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

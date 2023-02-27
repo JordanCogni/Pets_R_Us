@@ -198,17 +198,18 @@ namespace Pets_R_Us.Data.Migrations
                     b.Property<bool?>("Attending")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ReceivingUserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("RequestingUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Users")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -298,6 +299,9 @@ namespace Pets_R_Us.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<int?>("UsersId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -309,6 +313,8 @@ namespace Pets_R_Us.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.HasIndex("PetImageTableId");
+
+                    b.HasIndex("UsersId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -370,7 +376,13 @@ namespace Pets_R_Us.Data.Migrations
                         .WithMany()
                         .HasForeignKey("PetImageTableId");
 
+                    b.HasOne("Pets_R_Us.Data.PlayDate", "PlayDate")
+                        .WithMany()
+                        .HasForeignKey("UsersId");
+
                     b.Navigation("PetImageTable");
+
+                    b.Navigation("PlayDate");
                 });
 #pragma warning restore 612, 618
         }

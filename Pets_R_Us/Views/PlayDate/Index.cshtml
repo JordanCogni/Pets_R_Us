@@ -24,32 +24,51 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RequestDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Attending)
-                </td>
-                <td>
-                    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-regular fa-pen-to-square"></i></a>
-                </td>
-                <td>
-                    <button data-id="@item.Id" class="btn btn-outline-danger deleteBtn" type="button"><i class="fa-regular fa-trash-can"></i></button>
-                </td>
-            </tr>
-        }
+    @try
+    {
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Attending)
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-regular fa-pen-to-square"></i></a>
+                    </td>
+                    <td>
+                        <button data-id="@item.Id" class="btn btn-outline-danger deleteBtn" type="button"><i class="fa-regular fa-trash-can"></i></button>
+                    </td>
+                </tr>
+            }
     </tbody>
+    }
+    catch{
+        <div class="card" style="width: 18rem;">
+            <img src="https://th.bing.com/th/id/R.55c00c101d16124f09e3e09eba33c89d?rik=csGIKqBEMAjEQA&riu=http%3a%2f%2ffc03.deviantart.net%2ffs70%2ff%2f2012%2f192%2f1%2fe%2fhappy_dog____by_topas2012-d56wkvz.jpg&ehk=QdJkkkFZacb0%2flKqVQO9FIqsSQkyrhos50auPEaxDqM%3d&risl=&pid=ImgRaw&r=0" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p 
+                    class="card-text">Looks like you don't have any Play Date Requests.
+                </p> 
+                <p>
+                    Send one to another pet owner with the New Play Date button above.
+                </p>
+                <p>
+                    All your Play Date requests will be display below along with there status.
+                </p>
+            </div>
+        </div>
+    }
 </table>
 
 <form id="deleteForm" asp-action="Delete">
-    <input type="hidden" id="petImageId" name="Id" />
+    <input type="hidden" id="playDateId" name="Id" />
 </form>
 
 @section Scripts{
@@ -66,7 +85,7 @@
                     if (confirm) {
                         var btn = $(this);
                         var id = btn.data("id");
-                        $("#petImageId").val(id);
+                        $("#playDateId").val(id);
                         $("#deleteForm").submit();
                     }
                 });
