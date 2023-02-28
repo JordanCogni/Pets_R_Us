@@ -1,14 +1,26 @@
-﻿@model IEnumerable<PlayDateVM>
+﻿@model IEnumerable<PlayDateWithUsers>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index"; 
 }
-
 <h1 class="text-white text-center">PLAY DATE REQUESTS</h1>
 
 <p>
     <a class="btn btn-outline-success" asp-action="Create"><b>New Playdate</b></a>
 </p>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown button
+    </button>
+    <ul class="dropdown-menu">
+        @foreach (var item in (List<string>)ViewData["PetBreed"])
+        {
+            <li>
+                <a class="dropdown-item" asp-action="Create">@item</a>              
+            </li>
+        }
+    </ul>
+</div>
 <table class="table text-white">
     <thead>
         <tr>
@@ -91,6 +103,24 @@
                 });
             });
         });
+</script>
+<script>
+        function loadUsers() {
+            $.ajax({
+                url: "/Controllers/PlayDateController/GetAll",
+                type: "GET",
+                success: function (data) {
+                    // Populate the dropdown options
+                    $.each(data, function (index, user) {
+                        $("#users-dropdown").append("
+                            < option value = '" + user.id + "' > " + user.PetBreed + " < /option>");
+                    });
+                },
+                error: function (xhr) {
 
+                }
+            });
+        }
     </script>
+    
 }

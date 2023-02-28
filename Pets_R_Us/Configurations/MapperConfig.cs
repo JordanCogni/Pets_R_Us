@@ -11,6 +11,7 @@ namespace Pets_R_Us.Configurations
         {
             CreateMap<PetImageTable, PetImageTablesVM>().ReverseMap();
             CreateMap<PlayDate, PlayDateVM>().ReverseMap();
+            CreateMap<PlayDate, PlayDateWithUsers>().ReverseMap();
         }
 
     }
