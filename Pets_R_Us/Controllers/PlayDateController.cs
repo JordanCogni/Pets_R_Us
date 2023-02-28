@@ -14,24 +14,33 @@ namespace Pets_R_Us.Controllers
         private readonly IMapper mapper;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<Users> _userManager;
+        private readonly ApplicationDbContext _context;
 
         public PlayDateController(IWebHostEnvironment webHostEnvironment, IPlayDateRepository playDateRepository,
-            IMapper mapper, UserManager<Users> userManager)
+            IMapper mapper, UserManager<Users> userManager, ApplicationDbContext _context)
         {
             this.webHostEnvironment = webHostEnvironment;
             this.playDateRepository = playDateRepository;
             this.mapper = mapper;
             _userManager = userManager;
+            this._context = _context;
         }
 
 
         // GET: PlayDateController
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(PlayDateWithUsers playDateWithUsers)
         {
             var user = await _userManager.GetUserAsync(User);
+            var users = await _userManager.Users.ToListAsync();
+            var usersPetBreeds = new List<string>();
+            foreach (var person in users)
+            {
+                usersPetBreeds.Add(person.PetBreed);
+            }
             var playDates = await playDateRepository.GetAllAsync();
             var filteredPlayDates = playDates.Where(p => p.Users.Contains(user.Id));
-            var playDateVMs = mapper.Map<List<PlayDateVM>>(filteredPlayDates);
+            ViewData["PetBreed"] = usersPetBreeds;
+            var playDateVMs = mapper.Map<List<PlayDateWithUsers>>(filteredPlayDates);
 
             if (playDateVMs.Any())
             {
@@ -141,5 +150,27 @@ namespace Pets_R_Us.Controllers
             await playDateRepository.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
+
+        public IActionResult Search(int id)
+        {
+            var playDateWithUsers = from pd in _context.playDates
+                                    join u in _context.Users on pd.ReceivingUserId equals u.Id
+                                    select new PlayDateWithUsers
+                                    {
+                                        Id = pd.Id,
+                                        ReceivingUserId = pd.ReceivingUserId
+                                    };
+            return View(playDateWithUsers);
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var users = _context.Users.ToList();
+            return Json(users);
+        }
+
+
     }
 }
