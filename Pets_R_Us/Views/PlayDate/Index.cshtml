@@ -8,7 +8,7 @@
 <p>
     <a class="btn btn-outline-success" asp-action="Create"><b>New Playdate</b></a>
 </p>
-<table class="table text-white">
+<table class="table table-dark table-striped text-white">
     <thead>
         <tr>
             <th>
@@ -36,17 +36,19 @@
                         @Html.DisplayFor(modelItem => item.RequestDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Attending)
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" data-id="@item.Id" data-attending="@item.Attending" @(item.Attending ? "checked" : "") />
+                            <label class="form-check-label" for="attending-@item.Id">@if (item.Attending) { <span class="badge bg-success">Attending</span> } else { <span class="badge bg-danger">Not Attending</span> }</label>
+                        </div>
                     </td>
                     <td>
-                        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-regular fa-pen-to-square"></i></a>
-                    </td>
-                    <td>
+                        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-regular fa-pen-to-square"></i></a>    
                         <button data-id="@item.Id" class="btn btn-outline-danger deleteBtn" type="button"><i class="fa-regular fa-trash-can"></i></button>
                     </td>
                 </tr>
             }
-    </tbody>
+        </tbody>
+
     }
     catch{
         <div class="card" style="width: 18rem;">
@@ -92,5 +94,33 @@
         });
 </script>
 
+    <script>
+        $(document).ready(function () {
+            $(".form-check-input").change(function () {
+                var id = $(this).data("id");
+                var attending = $(this).is(":checked");
+                var url = "/PlayDate/UpdateAttending/" + id;
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: { attending: attending },
+                    success: function (data) {
+                        console.log("Attending status updated.");
+                        var label = $(".form-check-label[for='attending-" + id + "']");
+                        if (attending) {
+                            label.html("<span class='badge bg-success'>Attending</span>");
+                        } else {
+                            label.html("<span class='badge bg-danger'>Not Attending</span>");
+                        }
+                    },
+                    error: function () {
+                        console.log("Error updating attending status.");
+                    }
+                });
+            });
+        });
+
+    </script>
     
 }

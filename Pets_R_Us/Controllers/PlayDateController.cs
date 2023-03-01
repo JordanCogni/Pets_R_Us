@@ -175,6 +175,22 @@ namespace Pets_R_Us.Controllers
             return Json(users);
         }
 
+        [HttpPost]
+        public IActionResult UpdateAttending(int id, bool attending)
+        {
+            var playDate = _context.playDates.Find(id);
+            if (playDate == null)
+            {
+                return NotFound();
+            }
+
+            playDate.Attending = attending;
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
 
     }
 }
