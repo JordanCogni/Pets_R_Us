@@ -31,15 +31,10 @@ namespace Pets_R_Us.Controllers
         public async Task<IActionResult> Index(PlayDateWithUsers playDateWithUsers)
         {
             var user = await _userManager.GetUserAsync(User);
-            var users = await _userManager.Users.ToListAsync();
-            var usersPetBreeds = new List<string>();
-            foreach (var person in users)
-            {
-                usersPetBreeds.Add(person.PetBreed);
-            }
+
             var playDates = await playDateRepository.GetAllAsync();
-            var filteredPlayDates = playDates.Where(p => p.Users.Contains(user.Id));
-            ViewData["PetBreed"] = usersPetBreeds;
+            var filteredPlayDates = playDates.Where(p => p.Users.Contains(user.Id) ||
+            p.ReceivingUserId.Contains(user.Id));
             var playDateVMs = mapper.Map<List<PlayDateWithUsers>>(filteredPlayDates);
 
             if (playDateVMs.Any())
@@ -52,8 +47,17 @@ namespace Pets_R_Us.Controllers
 
 
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var users = await _userManager.Users.ToListAsync();
+            var usersPetBreeds = new List<string>();
+            foreach (var person in users)
+            {
+                usersPetBreeds.Add($"{person.PetBreed}|{person.Id}");
+
+            }
+            ViewData["PetBreed"] = usersPetBreeds;
+
             return View();
         }
 

@@ -8,6 +8,23 @@
 
 <h4 class="text-white">Play Date Request</h4>
 <hr />
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown button
+    </button>
+    <ul class="dropdown-menu">
+        @foreach (var item in (List<string>)ViewData["PetBreed"])
+        {
+            var values = item.Split('|');
+            var id = values[0];
+            var petBreed = values[1];
+            <li>
+                <a class="dropdown-item" onclick="setSelectedPetBreed('@petBreed')">@(id)</a>
+            </li>
+        }
+    </ul>
+</div>
+
 <div class="row text-white">
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
@@ -22,6 +39,7 @@
                 <input asp-for="RequestDate" class="form-control" />
                 <span asp-validation-for="RequestDate" class="text-danger"></span>
             </div>
+            <input type="hidden" id="selectedPetBreed" name="ReceivingUserId" />
             <br/>
             <div class="form-group">
                 <input type="submit" value="Send" class="btn btn-outline-success" />
@@ -32,4 +50,12 @@
 <br/>
 <div>
     <a asp-action="Index">Back to List</a>
-</div>                
+</div>  
+
+@section Scripts {
+    <script>
+        function setSelectedPetBreed(id) {
+            document.getElementById('selectedPetBreed').value = id;
+        }
+    </script>
+                }
