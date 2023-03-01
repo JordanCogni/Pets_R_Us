@@ -17,7 +17,7 @@ namespace Pets_R_Us.Models
 
         public bool Attending { get; set; }
 
-        public string? ReceivingUserId { get; set; }
+        public string ReceivingUserId { get; set; }
 
         public string Users { get; set; }
     }
