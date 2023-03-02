@@ -9,8 +9,8 @@
 <h4 class="text-white">Play Date Request</h4>
 <hr />
 <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown button
+    <button id="dropdownButton" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Pick a pet to date
     </button>
     <ul class="dropdown-menu">
         @foreach (var item in (List<string>)ViewData["PetBreed"])
@@ -19,7 +19,7 @@
             var id = values[0];
             var petBreed = values[1];
             <li>
-                <a class="dropdown-item" onclick="setSelectedPetBreed('@petBreed')">@(id)</a>
+                <a class="dropdown-item" onclick="setSelectedPetBreed('@petBreed')">@id</a>
             </li>
         }
     </ul>
@@ -40,7 +40,7 @@
                 <span asp-validation-for="RequestDate" class="text-danger"></span>
             </div>
             <input type="hidden" id="selectedPetBreed" name="ReceivingUserId" />
-            <br/>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Send" class="btn btn-outline-success" />
                 <a asp-action="Index" type="button" class="btn btn-outline-danger">Back</a>
@@ -53,6 +53,7 @@
     <script>
         function setSelectedPetBreed(id) {
             document.getElementById('selectedPetBreed').value = id;
+            document.getElementById('dropdownButton').innerText = document.querySelector('[onclick="setSelectedPetBreed(\'' + id + '\')"]').innerText;
         }
     </script>
-                }
+}
