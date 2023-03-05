@@ -1,0 +1,69 @@
+        public async Task<IActionResult> Search(string breed)
+        {
+            var playDates = await playDateRepository.GetAllAsync();
+            if (!string.IsNullOrEmpty(breed))
+            {
+                playDates = playDates.Where(p => p.Users.PetBreed == breed).ToList();
+            }
+            var playDateVMs = mapper.Map<List<PlayDateVM>>(playDates);
+            return View(playDateVMs);
+        }
+
+
+<div class="col-md-4">
+    <form asp-controller="PlayDate" asp-action="Search" method="get">
+        <div class="input-group">
+            <select class="form-control" name="breed">
+                @foreach (var breed in ViewBag.Breeds)
+                {
+                    <option value="@breed">@breed</option>
+                }
+            </select>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
+    </form>
+</div>
+
+<div class="col-md-4">
+    <form asp-controller="PlayDate" asp-action="Search" method="get">
+        <div class="input-group">
+            <select class="form-control" name="breed">
+                @foreach (var playDateWithUser in Model)
+                {
+                    <option value="@Model.PetBreed"></option>
+                }
+            </select>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
+    </form>
+</div>
+
+
+namespace Pets_R_Us.Models
+{
+    public class PlayDateWithUsers
+    {
+        public List<PlayDateVM>? playDate { get; set; }
+
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public DateTime RequestDate { get; set; }
+        public bool? Attending { get; set; }
+        public string? ReceivingUserId { get; set; }
+        public string Users { get; set; }
+        public string PetBreed { get; set; }
+
+    }
+}
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu">
+      @foreach (var item in Model)
+      {
+    <li><a class="dropdown-item" asp-action="Search"></a>@Html.DisplayFor(modelItem => item.PetBreed)</li>
+      }
+  </ul>
+</div>

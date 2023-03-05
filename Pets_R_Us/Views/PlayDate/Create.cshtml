@@ -4,50 +4,50 @@
     ViewData["Title"] = "Create";
 }
 
+
 <h1 class="text-white text-center">Send A Playdate Request</h1>
 
 <h4 class="text-white">Play Date Request</h4>
 <hr />
-<div class="dropdown">
-    <button id="dropdownButton" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Pick a pet to date
-    </button>
-    <ul class="dropdown-menu">
-        @foreach (var item in (List<string>)ViewData["PetBreed"])
-        {
-            var values = item.Split('|');
-            var id = values[0];
-            var petBreed = values[1];
-            <li>
-                <a class="dropdown-item" onclick="setSelectedPetBreed('@petBreed')">@id</a>
-            </li>
-        }
-    </ul>
-</div>
-
-<div class="row text-white">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row text-white">
+        <div class="col-md-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label for="selectedPetBreed">Pick a pet to date</label>
+                <select id="selectedPetBreed" name="ReceivingUserId" class="form-control" required>
+                    <option value="">--Select a pet--</option>
+                    @if (ViewData["PetBreed"] != null)
+                    {
+                        @foreach (var item in (List<string>)ViewData["PetBreed"])
+                        {
+                            var values = item.Split('|');
+                            var id = values[0];
+                            var petBreed = values[1];
+                            <option value="@petBreed">@id</option>
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="RequestDate" class="control-label"></label>
-                <input asp-for="RequestDate" class="form-control" />
-                <span asp-validation-for="RequestDate" class="text-danger"></span>
-            </div>
-            <input type="hidden" id="selectedPetBreed" name="ReceivingUserId" />
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Send" class="btn btn-outline-success" />
-                <a asp-action="Index" type="button" class="btn btn-outline-danger">Back</a>
-            </div>
-        </form>
+                    <label asp-for="Title" class="control-label" ></label>
+                    <input asp-for="Title" class="form-control" id="TitleInput" required/>
+                    <span asp-validation-for="Title" class="text-danger" id="Title"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RequestDate" class="control-label"></label>
+                <input asp-for="RequestDate" class="form-control" required/>
+                    <span asp-validation-for="RequestDate" class="text-danger" id="Date"></span>
+                </div>
+                <input type="hidden" id="selectedPetBreed" name="ReceivingUserId" required/>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Send" class="btn btn-outline-success"/>
+                    <a asp-action="Index" type="button" class="btn btn-outline-danger">Back</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
 @section Scripts {
     <script>
