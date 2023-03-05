@@ -19,6 +19,6 @@ namespace Pets_R_Us.Models
 
         public string ReceivingUserId { get; set; }
 
-        public string Users { get; set; }
+        public string? Users { get; set; }
     }
 }

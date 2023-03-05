@@ -10,6 +10,6 @@
 
         public string ReceivingUserId { get; set; }
 
-        public string Users { get; set; }
+        public string? Users { get; set; }
     }
 }
