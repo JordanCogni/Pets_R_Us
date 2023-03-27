@@ -78,21 +78,23 @@ namespace Pets_R_Us.Controllers
         // POST: PlayDateController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PlayDateVM playDateVM)
+        public async Task<IActionResult> Create(PlayDateWithUsers playDateWithUsers)
         {
-            var user = await _userManager.GetUserAsync(User);
 
+
+            var user = await _userManager.GetUserAsync(User);
 
             if (user != null)
             {
-                playDateVM.Users = user.Id;
+                playDateWithUsers.Users = user.Id;
 
-                var playDate = mapper.Map<PlayDate>(playDateVM);
+                var playDate = mapper.Map<PlayDate>(playDateWithUsers);
 
                 await playDateRepository.AddAsync(playDate);
                 return RedirectToAction(nameof(Index));
             }
-            return View(playDateVM);
+
+            return View(playDateWithUsers);
         }
 
 
