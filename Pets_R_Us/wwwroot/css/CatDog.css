@@ -14,7 +14,9 @@ html {
 }
 
 body {
-    background-image: url('https://wallpaperaccess.com/full/2378668.jpg');
+    background-image: url('https://cdn.pixabay.com/photo/2017/04/11/15/55/animals-2222007_960_720.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */

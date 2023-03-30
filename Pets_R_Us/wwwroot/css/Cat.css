@@ -14,7 +14,9 @@ html {
 }
 
 body {
-    background-image: url('https://th.bing.com/th/id/OIP.JdjSF7yPa2PodsGvlG0RCQHaE6?pid=ImgDet&rs=1');
+    background-image: url('https://images.unsplash.com/photo-1589883661923-6476cb0ae9f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */

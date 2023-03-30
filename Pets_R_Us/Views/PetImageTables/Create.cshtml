@@ -13,11 +13,6 @@
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="PetPic" class="control-label"></label>
-                <input asp-for="PetPic" class="form-control" />
-                <span asp-validation-for="PetPic" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="ImageTitle" class="control-label"></label>
                 <input asp-for="ImageTitle" class="form-control" />
                 <span asp-validation-for="ImageTitle" class="text-danger"></span>
@@ -30,15 +25,14 @@
             <div class="form-group">
                 <label asp-for="PetImage" class="control-label"></label>
                 <div class="custom-file">
-                    <input asp-for="PetImage" class="custom-file-input" id="customFile" />
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+                    <input asp-for="PetImage" class="form-control" id="customFile" />
+                    <label class="custom-file-label" for="customFile"></label>
                 </div>
                 <span asp-validation-for="PetImage" class="text-danger"></span>
             </div>
-            <br />
             <div class="form-group">
-                <input type="submit" value="Upload" class="btn btn-outline-primary" />
-                <a asp-action="Index" type="button" class="btn btn-outline-danger">Back</a>
+                <input type="submit" value="Upload" class="btn btn-primary" />
+                <a asp-action="Index" type="button" class="btn btn-danger">Back</a>
             </div>
         </form>
     </div>

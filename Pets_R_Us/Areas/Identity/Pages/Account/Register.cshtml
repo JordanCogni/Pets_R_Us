@@ -66,7 +66,7 @@
                 <select asp-for="Input.PetGender"
                         asp-items="@(Model.Gender)"
                         class="form-control">
-                    <option>Select an option</option>
+
                     
                 </select>
                 <label asp-for="Input.PetGender">Pet Gender</label>
@@ -89,9 +89,9 @@
             </div>
             <div class="form-floating">
                 <select asp-for="Input.UserRole"
-                        asp-items="@(Model.Roles)"
+                        asp-items="@(Model.Roles)" required
                         class="form-control">
-                    <option>Select an option</option>
+
                 </select>
                 <label asp-for="Input.UserRole">Dog or Cat Person?</label>
                 <span asp-validation-for="Input.UserRole" class="text-danger"></span>
