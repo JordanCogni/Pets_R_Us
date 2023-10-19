@@ -4,13 +4,12 @@
     ViewData["Title"] = "Register";
 }
 
-<h1 class="text-white">@ViewData["Title"]</h1>
 
-<div class="row">
-    <div class="col-md-4">
+<div class="row" style="justify-content: center;">
+    <div class="box-shadow3">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-          
-            <h2 class="text-white">Create a new account.</h2>
+
+            <h1 class="text-center">@ViewData["Title"]<br /> Create a new account.</h1>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
@@ -19,29 +18,25 @@
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-floating">
-                <input asp-for="Input.LastName" class="form-control" aria-required="true" />
+                <input asp-for="Input.LastName" class="form-control form-control-sm" aria-required="true" />
                 <label asp-for="Input.LastName"></label>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
             <div class="form-floating">
-    <select id="country" class="form-control" asp-for="Input.Country">
-        <option value="au">Australia</option>
-        <option value="nz">New Zealand</option>
-        <option value="gb">United Kingdom</option>
-        <option value="us">United States</option>
-        <option value="ca">Canada</option>
-    </select>
-    <label for="country">Country</label>
-</div>
-            
+                <select id="country" class="form-control" asp-for="Input.Country">
+                    <option value="au">Australia</option>
+                    <option value="nz">New Zealand</option>
+                    <option value="gb">United Kingdom</option>
+                    <option value="us">United States</option>
+                    <option value="ca">Canada</option>
+                </select>
+                <label for="country">Country</label>
+            </div>
             <div class="form-floating">
-                <input asp-for="Input.Address" type="text" class="form-control form-control-sm" id="address" placeholder="Address" />
-                <label for="address">Address</label>
+                <input asp-for="Input.Address" class="form-control" aria-required="true" />
+                <label asp-for="Input.Address"></label>
                 <span asp-validation-for="Input.Address" class="text-danger"></span>
             </div>
-            
-
-           
             <div class="form-floating">
                 <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" />
                 <label asp-for="Input.PhoneNumber"></label>
@@ -66,8 +61,6 @@
                 <select asp-for="Input.PetGender"
                         asp-items="@(Model.Gender)"
                         class="form-control">
-
-                    
                 </select>
                 <label asp-for="Input.PetGender">Pet Gender</label>
                 <span asp-validation-for="Input.PetGender" class="text-danger"></span>
@@ -91,12 +84,11 @@
                 <select asp-for="Input.UserRole"
                         asp-items="@(Model.Roles)" required
                         class="form-control">
-
                 </select>
                 <label asp-for="Input.UserRole">Dog or Cat Person?</label>
                 <span asp-validation-for="Input.UserRole" class="text-danger"></span>
             </div>
-            
+
 
 
 
@@ -113,62 +105,23 @@
 
 
 
-
-<!-- You also can use a "current" version (e.g: harmony-current.min.js) instead of a specific version -->
-<script src="https://common.mastersoftgroup.com/scripts/harmony-2.0.1.min.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="https://common.mastersoftgroup.com/scripts/harmony-2.0.1.min.css">
-
-<script>
-    var input = document.getElementById("address");
-    var country = "au";
-    // Use the environment based on the site it is on
-    Harmony.useEnv("https://hosted.mastersoftgroup.com");
-
-    // Init the client with the demo api user name and credential
-    // We have created the following user and credential which you can use on localhost
-    Harmony.init("Cogni10718", "um0CT0wFcMOvhzVDhhmhPIXhJ78dIk3W", Harmony.AUSTRALIA);
-    //exposeattributes
-    Harmony.useFeatureOptions({ "exposeAttributes": 1, "groupAddresses": 1 });
-
-
-
-    var opt = {
-        // min 3 chars to trigger the lookup
-        minLength: 3,
-        // enable getGeocode for non ANZ countries when address selected.
-        getIntlGeocode: true,
-
-        // override onSelect function if applicable (optional)
-        onSelect: function (event, ui) {
-            //console.log('address selected: ' + JSON.stringify(ui));
-          
-
-        },
-
-        // override onGeocode function if applicable (optional)
-        onIntlGeocode: function (event, ui) {
-             //console.log('geocode address selected: ' + JSON.stringify(ui.onIntlGeocodeItem));
-        },
-
-        // override onRetrieve function if applicable (optional)
-        onRetrieve: function (event, ui) {
-           //console.log('onRetrieve geocode address selected: ' + JSON.stringify(ui.onRetrieveItem));
-           
-        }
-    };
-
-    // Configure the address lookup.
-    var al = HarmonyJS.addressLookup(input, country, null, opt);
-    
-    
-
-</script>
-
-
-
-
-
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyCWvRJT3d4gfW68LnqH2WPQF56LtAnPD1M"></script>
+    <script type="text/javascript">
+
+        google.maps.event.addDomListener(window, 'load', function () {
+            var options = {
+                types: ['(cities)'],
+                componentRestrictions: { country: 'au'}
+            };
+            
+            var input = document.getElementById('Address');
+            var places = new google.maps.places.Autocomplete(input, options);
+
+        });
+
+    </script>
+
 }

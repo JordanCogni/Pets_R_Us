@@ -6,7 +6,7 @@ namespace Pets_R_Us.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Picture of fur baby")]
+        [Display(Name = "Image title")]
         [Required]
         public string ImageTitle { get; set; }
 

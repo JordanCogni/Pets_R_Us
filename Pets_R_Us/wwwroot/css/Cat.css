@@ -13,8 +13,16 @@ html {
   min-height: 100%;
 }
 
+html, body {
+    color: white;
+}
+
+h1 {
+    background-color: hsla(0, 0%, 0%, 0.6)
+}
+
 body {
-    background-image: url('https://images.unsplash.com/photo-1589883661923-6476cb0ae9f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80');
+    background-image: url('https://thumbs.dreamstime.com/z/paw-seamless-pattern-animal-footprints-bones-cat-dog-paws-wallpaper-cute-puppy-pet-cartoon-vector-background-134503990.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -53,6 +61,25 @@ a {
 
 .box-shadow {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.box-shadow2 {
+    width: 50%;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.35);
+    text-align: center;
+    background-color: hsla(0, 0%, 0%, 0.6)
+}
+
+.box-shadow4 {
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.35);
+    background-color: hsla(0, 0%, 0%, 0.6);
+}
+
+.box-shadow3 {
+    width: 35%;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.35);
+    text-align: center;
+    background-color: hsla(0, 0%, 0%, 0.6)
 }
 
 button.accept-policy {
