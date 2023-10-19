@@ -5,10 +5,10 @@ namespace Pets_R_Us.Models
     public class PlayDateWithUsers
     {
         public int Id { get; set; }
-        [Display(Name = "A Title For Your Playdate")]
+        [Display(Name = "A title for your playdate")]
         [Required]
         public string Title { get; set; }
-        [Display(Name = "Date Of The Playdate")]
+        [Display(Name = "Date of the playdate")]
         [Required]
         public DateTime RequestDate { get; set; }
         public bool Attending { get; set; }

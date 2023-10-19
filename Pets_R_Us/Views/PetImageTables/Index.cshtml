@@ -4,54 +4,37 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="text-white text-center">PET PHOTOS</h1>
+<div class="container">
+<h1 class="text-center">PET PHOTOS</h1>
 
 <p>
-    <a class="btn btn-outline-primary" asp-action="Create"><i class="fa-solid fa-arrow-up-from-bracket"></i> <b>Upload</b></a>
+    <a class="btn btn-primary" asp-action="Create"><i class="fa-solid fa-arrow-up-from-bracket"></i> <b>Upload</b></a>
 </p>
-<table class="table table-dark table-striped text-white">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PetPic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageCaption)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PetImageUrl)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetPic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageCaption)
-            </td>
-            <td>
-                <div>
-                    <img src="@item.PetImageUrl" class="img-fluid; rounded" style="max-width: 25%; max-height: 25%"/>
+    <div class="row">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="card h-100">
+                            <img src="@item.PetImageUrl" class="card-img-top" style="height: 450px">
+                            <div class="card-body" style="color:black">
+                                <h5 class="card-title">@item.ImageTitle</h5>
+                                <p class="card-text">@item.ImageCaption</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row" style="justify-content:right">
+                                    <button data-id="@item.Id" class="btn btn-outline-danger deleteBtn" type="button"><i class="fa-regular fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </td>
-            <td>
-                    <button data-id="@item.Id" class="btn btn-outline-danger deleteBtn" type="button"><i class="fa-regular fa-trash-can"></i></button>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-
+            }
+        </div>
+    </div>
+</div>
+        
 <form id="deleteForm" asp-action="Delete">
     <input type="hidden" id="petImageId" name="Id"/>
 </form>

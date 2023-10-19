@@ -184,7 +184,7 @@ namespace Pets_R_Us.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PetImageTables");
+                    b.ToTable("PetImageTables", (string)null);
                 });
 
             modelBuilder.Entity("Pets_R_Us.Data.PlayDate", b =>
@@ -214,7 +214,7 @@ namespace Pets_R_Us.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("playDates");
+                    b.ToTable("playDates", (string)null);
                 });
 
             modelBuilder.Entity("Pets_R_Us.Data.Users", b =>

@@ -50,9 +50,9 @@ namespace Pets_R_Us.Areas.Identity.Pages.Account
         {
             new SelectListItem {Value = "Male", Text ="Male"},
             new SelectListItem {Value = "Female", Text = "Female"},
-            
+
         };
-       
+
         }
 
         public List<SelectListItem> Roles { get; set; }
@@ -85,7 +85,7 @@ namespace Pets_R_Us.Areas.Identity.Pages.Account
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        
+
         public class InputModel
         {
             /// <summary>
@@ -110,10 +110,11 @@ namespace Pets_R_Us.Areas.Identity.Pages.Account
             [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
 
-            
+            [Required]
             [Display(Name = "Address")]
             public string Address { get; set; }
 
+            [Required]
             [Display(Name = "Country")]
             public string Country { get; set; }
 
@@ -133,7 +134,7 @@ namespace Pets_R_Us.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Pet Gender")]
             public string PetGender { get; set; }
-           
+
             [Required]
             [Display(Name = "UserRole")]
             public string UserRole { get; set; }
@@ -179,7 +180,7 @@ namespace Pets_R_Us.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.Address = Input.Address;
-                
+
                 user.PhoneNumber = Input.PhoneNumber;
                 user.PetName = Input.PetName;
                 user.PetBreed = Input.PetBreed;

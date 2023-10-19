@@ -1,13 +1,28 @@
-﻿<h1 class="text-center text-white">OUR LOCATION</h1>
+﻿@{
+    ViewData["Title"] = "Our Location";
+}
 
-<div style="margin: 1rem auto; width: 60%;">
-  <p  class="text-white" style="font-size: 1.125rem; line-height: 1.5; margin-bottom: 1rem;">We organize pet meetups for animal lovers and their furry friends. Our business operates from 9am to 5pm, Monday to Friday. Come and join us for some pawsome fun!</p>
-  <p  class="text-white" style="font-size: 1.125rem; line-height: 1.5; margin-bottom: 1rem;">You can reach us at: <a href="tel:555-555-5555" style="color: whitesmoke;">555-555-5555</a></p>
-  <p  class="text-white" style="font-size: 1.125rem; line-height: 1.5; margin-bottom: 1rem;">Our business hours are:</p>
-  <ul style="font-size: 1.125rem; line-height: 1.5; margin-bottom: 1rem;">
-    <li  class="text-white">Monday to Friday: 9am to 5pm</li>
-  </ul>
-  <div id="map" style="text-align: center;">
-        <img src="https://www.seafordcentral.com.au/images/2019-11-25_200604.jpg" alt="Map of Our Location" style="max-width: 100%;">
-  </div>
+<div class="box-shadow4">
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <iframe width="600"
+                    height="450"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyByZDtJh4Ev4YVodMO6UjWAJX7sGSIGZzc
+    &q=Santos,Adelaide+SA">
+            </iframe>
+        </div>
+        <div class="col">
+            <h3 class="card-title">Our Location</h3>
+            <p class="card-text">We organize pet meetups for animal lovers and their furry friends.</p>
+            <p class="card-text">Our business operates from 9am to 5pm, Monday to Friday.</p>
+            <p class="card-text">You can reach us at: 555-555-5555</p>
+            <p class="card-text">Come and join us for some pawsome fun.</p>
+        </div>
+    </div>
+    </div>
 </div>

@@ -13,8 +13,16 @@ html {
   min-height: 100%;
 }
 
+html, body {
+    color: red;
+}
+
+h2 {
+    background-color: hsla(0, 0%, 0%, 0.6)
+}
+
 body {
-    background-image: url('https://th.bing.com/th/id/OIP.cEWhil2XyRD28wr4S627LwHaEo?pid=ImgDet&rs=1');
+    background-image: url('https://img.freepik.com/premium-vector/pet-footprint-seamless-pattern-pet-animal-dog-cat-footprint-background-with-heart-puppy-valentine-texture-doodle-wallpaper_253081-1616.jpg');
 }
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
@@ -26,7 +34,7 @@ a.navbar-brand {
 }
 
 a {
-    color: #0077cc;
+    color: red;
 }
 
 .btn-primary {
@@ -52,6 +60,25 @@ a {
 
 .box-shadow {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.box-shadow2 {
+    width: 50%;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.35);
+    text-align: center;
+    background-color: hsla(0, 0%, 0%, 0.6)
+}
+
+.box-shadow4 {
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.35);
+    background-color: hsla(0, 0%, 0%, 0.6);
+}
+
+.box-shadow3 {
+    width: 35%;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.35);
+    text-align: center;
+    background-color: hsla(0, 0%, 0%, 0.6)
 }
 
 button.accept-policy {
