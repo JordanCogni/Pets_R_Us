@@ -33,7 +33,7 @@
                 <label for="country">Country</label>
             </div>
             <div class="form-floating">
-                <input asp-for="Input.Address" class="form-control" aria-required="true" />
+                <input asp-for="Input.Address" class="form-control" id="Address" aria-required="true" />
                 <label asp-for="Input.Address"></label>
                 <span asp-validation-for="Input.Address" class="text-danger"></span>
             </div>
@@ -94,6 +94,8 @@
 
 
 
+
+
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
         <br />
@@ -101,8 +103,6 @@
         <br />
     </div>
 </div>
-
-
 
 
 @section Scripts {
@@ -113,15 +113,16 @@
 
         google.maps.event.addDomListener(window, 'load', function () {
             var options = {
-                types: ['(cities)'],
-                componentRestrictions: { country: 'au'}
+                types: ['geocode'],
+                componentRestrictions: { 'country': ['AU'] }
             };
-            
+
             var input = document.getElementById('Address');
             var places = new google.maps.places.Autocomplete(input, options);
 
         });
 
     </script>
+
 
 }
